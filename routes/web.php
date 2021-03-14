@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('/login', 'AuthController@login');
+
+    Route::post('/login/auth', 'AuthController@authenticate');
 });
