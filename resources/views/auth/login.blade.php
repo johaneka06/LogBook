@@ -12,6 +12,11 @@
           Login your account
         </div>
         <div class="card-body">
+          @if($errors->any())
+          @foreach($errors->all() as $error)
+          <div class="alert alert-danger">{{ $error }}</div>
+          @endforeach
+          @endif
           <form action="{{ url('/login/auth') }}" method="post" class="form-group">
           @csrf
             <div class="row mb-3">
@@ -27,7 +32,7 @@
                 <label for="password" class="align-middle">Password:</label>
               </div>
               <div class="me-auto col-7">
-                <input type="password" name="username" id="username" placeholder="Place password" class="form-control">
+                <input type="password" name="password" id="password" placeholder="Place password" class="form-control">
               </div>
             </div>
             <div class="border-top mt-3">

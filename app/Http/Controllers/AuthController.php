@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewUser;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -13,62 +17,42 @@ class AuthController extends Controller
 
     public function register()
     {
-        //
+        return view('auth/register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(NewUser $request)
     {
-        //
+        $request = $request->validated();
+
+        $user = User::create([
+            'email' => $request['email'],
+            'name' => $request['name'],
+            'password' => bcrypt($request['password']),
+            'remember_token' => Str::random(64)
+        ]);
+
+        Auth::attempt(['email' => $user->email, 'password' => $request['password']]);
+        return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function logout()
     {
-        //
+        Auth::logout();
+        return redirect('/login');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function authenticate(Request $request)
     {
-        //
+        $user = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if(!Auth::attempt(['email' => $user['email'], 'password' => $request['password']])) {
+            return redirect('/login')->withErrors('Wrong email/password');
+        } else {
+            return redirect('/');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
