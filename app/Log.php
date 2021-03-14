@@ -12,6 +12,10 @@ class Log extends Model
         'id' => 'string'
     ];
 
+    protected $fillable = [
+        'id', 'log_date', 'title', 'description', 'user_id'
+    ];
+
     public function User() {
         return $this->belongsTo('App\User');
     }

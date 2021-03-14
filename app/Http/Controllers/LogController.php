@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Log;
+use App\Mail\NewEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Ramsey\Uuid\Uuid;
 
 class LogController extends Controller
 {
@@ -18,69 +22,61 @@ class LogController extends Controller
         return view('index', ['logs' => $logs]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('addlog');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request = $request->validate([
+            'title' => 'required',
+            'detail' => 'required',
+            'date' => 'required'
+        ]);
+        
+        $id = Uuid::uuid4();
+
+        $log = Log::create([
+            'user_id' => Auth::user()->id,
+            'id' => $id,
+            'log_date' => $request['date'],
+            'title' => $request['title'],
+            'description' => $request['detail']
+        ]);
+
+        Mail::to(Auth::user()->email)->send(new NewEntry($log, Auth::user()->name, $id));
+
+        return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $log = Log::where('id', '=', $id)->first();
+        return view('log-detail', ['log' => $log]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $request = $request->validate([
+            'title' => 'required',
+            'detail' => 'required',
+            'date' => 'required'
+        ]);
+
+        $log = Log::where('id', '=', $id)->first();
+
+        $log->title = $request['title'];
+        $log->log_date = $request['date'];
+        $log->description = $request['detail'];
+        $log->save();
+
+        return redirect('/log/'.$id.'/detail');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Log::where('id', '=', $id)->first()->delete();
+        return redirect('/');
     }
 }
