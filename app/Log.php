@@ -11,4 +11,8 @@ class Log extends Model
     protected $casts = [
         'id' => 'string'
     ];
+
+    public function User() {
+        return $this->belongsTo('App\User');
+    }
 }
