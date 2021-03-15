@@ -18,7 +18,7 @@ class LogController extends Controller
      */
     public function index()
     {
-        $logs = Auth::user()->Logs;
+        $logs = Log::where('user_id', '=', Auth::user()->id)->orderBy('log_date', 'DESC')->get();
         return view('index', ['logs' => $logs]);
     }
 
@@ -45,7 +45,7 @@ class LogController extends Controller
             'description' => $request['detail']
         ]);
 
-        Mail::to(Auth::user()->email)->send(new NewEntry($log, Auth::user()->name, $id));
+        // Mail::to(Auth::user()->email)->send(new NewEntry($log, Auth::user()->name, $id));
 
         return redirect('/');
     }
