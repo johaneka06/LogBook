@@ -35,12 +35,28 @@
               <input type="text" name="title" id="title" placeholder="Place log title" class="form-control">
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-3">
             <div class="ms-auto col-3">
               <label for="detail" class="align-middle">Detail:</label>
             </div>
             <div class="me-auto col-7">
-              <textarea type="password" name="detail" id="detail" placeholder="Place your detail activity" class="form-control"></textarea>
+              <textarea name="detail" id="detail" placeholder="Place your detail activity" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="ms-auto col-3">
+              <label for="clock_in" class="align-middle">Clock In:</label>
+            </div>
+            <div class="me-auto col-7">
+              <input type="time" name="clock_in" id="clock_in" placeholder="Clock in required" class="form-control">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="ms-auto col-3">
+              <label for="clock_out" class="align-middle">Clock Out:</label>
+            </div>
+            <div class="me-auto col-7">
+              <input type="time" name="clock_out" id="clock_out" placeholder="Clock out can be null" class="form-control">
             </div>
           </div>
           <div class="border-top mt-3">
