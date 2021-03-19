@@ -11,11 +11,7 @@ use Ramsey\Uuid\Uuid;
 
 class LogController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $logs = Log::where('user_id', '=', Auth::user()->id)->orderBy('log_date', 'DESC')->get();
@@ -29,10 +25,13 @@ class LogController extends Controller
 
     public function store(Request $request)
     {
+        $clock_out = ($request->has('clock_out') ? $request->clock_out : "");
+
         $request = $request->validate([
             'title' => 'required',
             'detail' => 'required',
-            'date' => 'required'
+            'date' => 'required',
+            'clock_in' => 'required',
         ]);
         
         $id = Uuid::uuid4();
@@ -42,7 +41,9 @@ class LogController extends Controller
             'id' => $id,
             'log_date' => $request['date'],
             'title' => $request['title'],
-            'description' => $request['detail']
+            'description' => $request['detail'],
+            'clock_in' => $request['clock_in'],
+            'clock_out' => $clock_out,
         ]);
 
         // Mail::to(Auth::user()->email)->send(new NewEntry($log, Auth::user()->name, $id));
@@ -58,10 +59,12 @@ class LogController extends Controller
 
     public function update(Request $request, $id)
     {
+        $clock_out = ($request->has('clock_out') ? $request->clock_out : "");
         $request = $request->validate([
             'title' => 'required',
             'detail' => 'required',
-            'date' => 'required'
+            'date' => 'required',
+            'clock_in' => 'required',
         ]);
 
         $log = Log::where('id', '=', $id)->first();
@@ -69,6 +72,8 @@ class LogController extends Controller
         $log->title = $request['title'];
         $log->log_date = $request['date'];
         $log->description = $request['detail'];
+        $log->clock_in = $request['clock_in'];
+        $log->clock_out = $clock_out;
         $log->save();
 
         return redirect('/log/'.$id.'/detail');
