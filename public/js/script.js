@@ -14,6 +14,7 @@ if(pathname == '/') {
     element.classList.add("active");
 
     document.querySelector("#date").value = new Date().toISOString().substr(0, 10);
+
 }
 
 $("#update").click(function() {
@@ -24,4 +25,6 @@ $("#update").click(function() {
     document.getElementById("date").disabled = false;
     document.getElementById("title").disabled = false;
     document.getElementById("detail").disabled = false;
+    document.getElementById("clock_in").disabled = false;
+    document.getElementById("clock_out").disabled = false;
 })
