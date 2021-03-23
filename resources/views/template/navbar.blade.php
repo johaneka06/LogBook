@@ -30,7 +30,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             @if(Auth::check())
-            <li><a class="dropdown-item" href="{{ url('/profile') }}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profile/'.Auth::user()->id) }}">Profile</a></li>
             <li><a class="dropdown-item" href="{{ url('/logout') }}">Log Out</a></li>
             @endif
           </ul>
