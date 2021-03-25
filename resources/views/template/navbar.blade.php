@@ -11,7 +11,7 @@
         </li>
         @if(Auth::check())
         <li class="nav-item">
-          <a class="nav-link" href="#" id="addEntry">Add Entry</a>
+          <a class="nav-link" href="{{ url('/log/add') }}" id="addEntry">Add Entry</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" id="viewLog">View Log</a>
@@ -30,7 +30,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             @if(Auth::check())
-            <li><a class="dropdown-item" href="{{ url('/profile/'.Auth::user()->id) }}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ url('/profile') }}">Profile</a></li>
             <li><a class="dropdown-item" href="{{ url('/logout') }}">Log Out</a></li>
             @endif
           </ul>

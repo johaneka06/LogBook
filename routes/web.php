@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/log/{id}/delete', 'LogController@destroy');
     Route::get('/log/add', 'LogController@create');
     Route::get('/logout', 'AuthController@logout');
-    Route::get('/profile/{id}', 'UserController@profile');
+    Route::get('/profile', 'UserController@profile');
     
     Route::post('/log/add/store', 'LogController@store');
     Route::post('/log/{id}/update', 'LogController@update');

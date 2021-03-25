@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile($id)
+    public function profile()
     {
-        $user = User::find($id);
+        //Remove ID
+        $user = Auth::user();
         return view('profile',['user'=>$user]);
     }
 }
