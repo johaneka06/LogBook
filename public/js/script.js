@@ -28,3 +28,23 @@ $("#update").click(function() {
     document.getElementById("clock_in").disabled = false;
     document.getElementById("clock_out").disabled = false;
 })
+
+$("#editBtn").click(function() {
+    document.getElementById("updateBtn").hidden = false;
+    document.getElementById("cancelBtn").hidden = false;
+
+    document.getElementById("editBtn").hidden = true;
+
+    document.getElementById("profileName").removeAttribute("readonly")
+    document.getElementById("profileEmail").removeAttribute("readonly")
+})
+
+$("#cancelBtn").click(function() {
+    document.getElementById("updateBtn").hidden = true;
+    document.getElementById("cancelBtn").hidden = true;
+
+    document.getElementById("editBtn").hidden = false;
+
+    document.getElementById("profileName").readOnly = true
+    document.getElementById("profileEmail").readOnly = true
+})
