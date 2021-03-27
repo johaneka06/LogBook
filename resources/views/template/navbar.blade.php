@@ -11,7 +11,7 @@
         </li>
         @if(Auth::check())
         <li class="nav-item">
-          <a class="nav-link" href="#" id="addEntry">Add Entry</a>
+          <a class="nav-link" href="{{ url('/log/add') }}" id="addEntry">Add Entry</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" id="viewLog">View Log</a>

@@ -29,7 +29,13 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/log/{id}/delete', 'LogController@destroy');
     Route::get('/log/add', 'LogController@create');
     Route::get('/logout', 'AuthController@logout');
+    Route::get('/profile', 'UserController@profile');
     
     Route::post('/log/add/store', 'LogController@store');
     Route::post('/log/{id}/update', 'LogController@update');
+
+    Route::post('/profile/{id}/update', 'UserController@update');
+
+    Route::get('/export/pdf', 'ExportController@exportPDF');     
+    Route::get('/export/xlsx', 'ExportController@exportXLSX');
 });

@@ -12,6 +12,11 @@
           Create your account
         </div>
         <div class="card-body">
+          @if ($errors->any())
+              @foreach ($errors->all() as $e)
+                  <div class="alert alert-danger">{{$e}}</div>
+              @endforeach
+          @endif
           <form action="{{ url('/register/create') }}" method="post" class="form-group">
             @csrf
             <div class="row mb-3">
