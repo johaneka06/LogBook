@@ -17,7 +17,7 @@
         <button class="btn btn-warning" id="editBtn" name="editBtn" type="button">Edit Profile</button>
         <button class="btn btn-warning" id="cancelBtn" name="cancelBtn" hidden type="button">Cancel</button>
         <button class="btn btn-primary" id="updateBtn" name="cancelBtn" hidden type="submit">Update Profile</button></a>
-        <a href="{{url('/export/pdf')}}"><button class="btn btn-danger">Export to PDF</button></a>
+        <a href="{{url('/export/pdf')}}" class="btn btn-danger">Export to PDF</a>
 
     </form>
     
