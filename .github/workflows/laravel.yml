@@ -37,7 +37,7 @@ jobs:
         script: |
           cd /var/www/LogBook/
           sudo composer install
-          sudo php artisan migrate
+          sudo php artisan migrate --force
           
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
