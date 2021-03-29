@@ -38,9 +38,6 @@ jobs:
           cd /var/www/LogBook/
           sudo composer install
           sudo php artisan migrate
-          sudo php artisan cache:clear
-          sudo php artisan config:clear
-          sudo php artisan config:cache
           
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
