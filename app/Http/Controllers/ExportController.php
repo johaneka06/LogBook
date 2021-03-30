@@ -13,10 +13,8 @@ class ExportController extends Controller
     {
         $user = Auth::user()->id;
         $data = Log::where('user_id','like',$user)->orderBy('log_date', 'DESC')->get();
-        // dd($data);
         $pdf = PDF::loadView('template.export',['data'=>$data]);
         return $pdf->download('YourLogBook.pdf');
-        // return $pdf->stream();
     }
 
     public function exportXLSX(Request $request)

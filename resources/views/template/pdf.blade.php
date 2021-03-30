@@ -4,7 +4,6 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -19,32 +18,26 @@
             <p>Name: {{ Auth::user()->name }}</p>
             <p>Email: {{ Auth::user()->email }}</p>
         </div>
-        <div class="my-5">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Log Date</th>
-                        <th scope="col">Clock In</th>
-                        <th scope="col">Clock Out</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Desc</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($logs as $log)
-                    <tr>
-                        <th scope="row">{{ $i++ }}</th>
-                        <td>{{$log->log_date}}</td>
-                        <td>{{ $log->clock_in }}</td>
-                        <td>{{ $log->clock_out }}</td>
-                        <td>{{ $log->title }}</td>
-                        <td>{{ $log->description }}</td>
-                    </tr>
-                    @endforeach
-
-                </tbody>
-            </table>
+        <div class="mt-5 mb-5">
+            <div class="row my-3">
+                <div class="col">No</div>
+                <div class="col">Log Date</div>
+                <div class="col">Clock In</div>
+                <div class="col">Clock Out</div>
+                <div class="col">Title</div>
+                <div class="col">Description</div>
+            </div>
+            @foreach($logs as $log)
+            <div class="row my-2">
+                <div class="col">{{ $i++ }}</div>
+                <div class="col">{{$log->log_date}}</div>
+                <div class="col">{{ $log->clock_in }}</div>
+                <div class="col">{{ $log->clock_out }}</div>
+                <div class="col">{{ $log->title }}</div>
+                <div class="col">{{ $log->description }}</div>
+            </div>
+            @endforeach
+            
         </div>
 
     </div>
