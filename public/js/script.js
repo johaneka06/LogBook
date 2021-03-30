@@ -15,6 +15,9 @@ if(pathname == '/') {
 
     document.querySelector("#date").value = new Date().toISOString().substr(0, 10);
 
+} else if(pathname == '/log/all') {
+    var element = document.getElementById("viewLog");
+    element.classList.add("active");
 }
 
 $("#update").click(function() {
