@@ -14,8 +14,14 @@ class LogController extends Controller
 
     public function index()
     {
-        $logs = Log::where('user_id', '=', Auth::user()->id)->orderBy('log_date', 'DESC')->get();
+        $logs = Log::where('user_id', '=', Auth::user()->id)->orderBy('log_date', 'DESC')->take(5)->get();
         return view('index', ['logs' => $logs]);
+    }
+
+    public function displayAll()
+    {
+        $logs = Log::where('user_id', '=', Auth::user()->id)->orderBy('log_date', 'DESC')->paginate(7);
+        return view('all-view', ['logs' => $logs]);
     }
 
     public function create()

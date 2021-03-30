@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/log/{id}/detail', 'LogController@show');
     Route::get('/log/{id}/delete', 'LogController@destroy');
     Route::get('/log/add', 'LogController@create');
+    Route::get('/log/all', 'LogController@displayAll');
     Route::get('/logout', 'AuthController@logout');
     Route::get('/profile', 'UserController@profile');
     

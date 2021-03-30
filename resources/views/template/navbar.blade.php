@@ -14,7 +14,7 @@
           <a class="nav-link" href="{{ url('/log/add') }}" id="addEntry">Add Entry</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" id="viewLog">View Log</a>
+          <a class="nav-link" href="{{ url('/log/all') }}" id="viewLog">View Log</a>
         </li>
         @else
         <li class="nav-item">
